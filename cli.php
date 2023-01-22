@@ -58,6 +58,7 @@ $comment = new Comment(
     $post->getId(),
     $commentText
 );
+
 try {
     if (isset($argv[1])) {
         $arg = $argv[1];
