@@ -2,15 +2,16 @@
 
 namespace GeekBrains\LevelTwo\Blog;
 
+use GeekBrains\LevelTwo\Person\Name;
+
 class User {
     public function __construct(
         public int $id,
-        public string $firstName,
-        public string $lastName
+        public Name $name
     ){}
 
     public function __toString() {
-        return "Пользователь $this->firstName $this->lastName с id $this->id";
+        return "Пользователь $this->name с id $this->id";
     }
 
     public function getId() :int {
@@ -21,19 +22,11 @@ class User {
         $this->id = $id;
     }
 
-    public function getFirstName() :string {
-        return $this->firstName;
+    public function name() :string {
+        return $this->name;
     }
 
-    public function setFirstName(string $firstName) :void {
-        $this->firstName = $firstName;
-    }
-
-    public function getLastName() :string {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $secondName) :void {
-        $this->lastName = $lastName;
+    public function setName(Name $name) :void {
+        $this->name = $name;
     }
 }
