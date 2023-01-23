@@ -2,31 +2,36 @@
 
 namespace GeekBrains\LevelTwo\Blog;
 
-use GeekBrains\LevelTwo\Person\Name;
+use GeekBrains\LevelTwo\Blog\Name;
 
 class User {
     public function __construct(
-        public int $id,
-        public Name $name
+        private UUID $uuid,
+        private string $username,
+        private Name $name
     ){}
 
     public function __toString() {
-        return "Пользователь $this->name с id $this->id";
+        return "Пользователь $this->name с id $this->uuid";
     }
 
-    public function getId() :int {
-        return $this->id;
+    public function uuid() :UUID {
+        return $this->uuid;
     }
 
-    public function setId(int $id) :void {
-        $this->id = $id;
+    public function setId(int $uuid) :void {
+        $this->uuid = $uuid;
     }
 
-    public function name() :string {
+    public function name() :Name {
         return $this->name;
     }
 
     public function setName(Name $name) :void {
         $this->name = $name;
+    }
+
+    public function username() :string {
+        return $this->username;
     }
 }
