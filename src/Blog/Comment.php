@@ -11,7 +11,7 @@ class Comment {
     ){}
 
     public function __toString() {
-        return "Комментарий №$this->uuid:" . PHP_EOL . "$this->text";
+        return "$this->text";
     }
 
     public function getUuid() :UUID {
