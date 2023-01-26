@@ -4,38 +4,38 @@ namespace GeekBrains\LevelTwo\Blog;
 
 class Comment {
     public function __construct(
-        public int $id,
-        public int $idAuthor,
-        public int $idPost,
+        public UUID $uuid,
+        public UUID $authorUuid,
+        public UUID $postUuid,
         public string $text
     ){}
 
     public function __toString() {
-        return "Комментарий №$this->id:" . PHP_EOL . "$this->text";
+        return "Комментарий №$this->uuid:" . PHP_EOL . "$this->text";
     }
 
-    public function getId() :int {
-        return $this->id;
+    public function getUuid() :UUID {
+        return $this->uuid;
     }
 
-    public function setId(int $id) :void {
-        $this->id = $id;
+    public function setUuid(UUID $uuid) :void {
+        $this->uuid = $uuid;
     }
 
-    public function getIdAuthor() :int {
-        return $this->idAuthor;
+    public function getAuthorUuid() :UUID {
+        return $this->authorUuid;
     }
 
-    public function setIdAuthor(string $idAuthor) :void {
-        $this->idAuthor = $idAuthor;
+    public function setAuthorUuid(UUID $authorUuid) :void {
+        $this->authorUuid = $authorUuid;
     }
 
-    public function getIdPost() :int {
-        return $this->idPost;
+    public function getPostUuid() :UUID {
+        return $this->postUuid;
     }
 
-    public function setIdPost(int $idPost) :void {
-        $this->idPost = $idPost;
+    public function setPostUuid(UUID $postUuid) :void {
+        $this->postUuid = $postUuid;
     }
 
     public function getText() :string {

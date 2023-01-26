@@ -2,8 +2,6 @@
 
 namespace GeekBrains\LevelTwo\Blog;
 
-use GeekBrains\LevelTwo\Blog\Name;
-
 class User {
     public function __construct(
         private UUID $uuid,

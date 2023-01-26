@@ -2,8 +2,7 @@
 
 namespace GeekBrains\LevelTwo\Blog\Repositories\UsersRepository;
 
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\{User,UUID};
 
 interface UsersRepositoryInterface {
     public function get(UUID $uuid) :User;
