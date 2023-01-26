@@ -2,11 +2,9 @@
 
 namespace GeekBrains\LevelTwo\Blog\Commands;
 
-use GeekBrains\LevelTwo\Blog\Name;
-use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
+use GeekBrains\LevelTwo\Blog\{Name,User,UUID};
+use GeekBrains\LevelTwo\Blog\Exceptions\{UserNotFoundException,CommandException};
 use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\UUID;
 
 class CreateUserCommand {
     public function __construct(
@@ -17,12 +15,11 @@ class CreateUserCommand {
         $input = $this->parseRawInput($rawInput);
 
         $username = $input['username'];
-        // Проверяем, существует ли пользователь в репозитории
+
         if ($this->userExists($username)) {
-        // Бросаем исключение, если пользователь уже существует
-        throw new CommandException("User already exists: $username");
+            throw new CommandException("User already exists: $username");
         }
-        // Сохраняем пользователя в репозиторий
+        
         $this->usersRepository->save(new User(
         UUID::random(),
         $username,
@@ -30,29 +27,6 @@ class CreateUserCommand {
         ));
     }
 
-    // Преобразуем входной массив
-    // из предопределённой переменной $argv
-    //
-    // array(4) {
-    // [0]=>
-    // string(18) "/some/path/cli.php"
-    // [1]=>
-    // string(13) "username=ivan"
-    // [2]=>
-    // string(15) "first_name=Ivan"
-    // [3]=>
-    // string(17) "last_name=Nikitin"
-    // }
-    //
-    // в ассоциативный массив вида
-    // array(3) {
-    // ["username"]=>
-    // string(4) "ivan"
-    // ["first_name"]=>
-    // string(4) "Ivan"
-    // ["last_name"]=>
-    // string(7) "Nikitin"
-    //}
     private function parseRawInput(array $rawInput): array {
         $input = [];
 
