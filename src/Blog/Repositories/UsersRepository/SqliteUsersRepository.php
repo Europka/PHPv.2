@@ -2,10 +2,9 @@
 
 namespace GeekBrains\LevelTwo\Blog\Repositories\UsersRepository;
 
-use GeekBrains\LevelTwo\Blog\User;
-use GeekBrains\LevelTwo\Blog\Name;
-use GeekBrains\LevelTwo\Blog\UUID;
+use GeekBrains\LevelTwo\Blog\{User,Name,UUID};
 use GeekBrains\LevelTwo\Blog\Repositories\UsersRepository\UsersRepositoryInterface;
+use GeekBrains\LevelTwo\Blog\Exceptions\UserNotFoundException;
 use \PDO;
 use \PDOStatement;
 
