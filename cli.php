@@ -25,7 +25,6 @@ $connection = new PDO('sqlite:' . __DIR__ . '/blog.sqlite');
 //     text TEXT NOT NULL
 // )
 
-$usersRepository = new SqliteUsersRepository($connection);
 // $command = new CreateUserCommand($usersRepository);
 
 // try {
@@ -34,14 +33,15 @@ $usersRepository = new SqliteUsersRepository($connection);
 //     echo $e->getMessage();
 // }
 
+$usersRepository = new SqliteUsersRepository($connection);
 $user = $usersRepository->getByUsername('egorio1337');
 
 $postId = UUID::random();
 $post = new Post(
     $postId,
     $user->uuid(),
-    'Новый пост',
-    'Здесь что-то умное написано, потому что ну а как иначе? Это же интернет'
+    'Мой второй пост',
+    'Здесь что-то не настолько умное, как в первом посте (потому что автор исписался), но всё еще я прав, потому что ну а как же? Это же интернет'
 );
 
 $commentId = UUID::random();
@@ -53,10 +53,30 @@ $comment = new Comment(
 );
 
 $sqliteCommentsRepository = new SqliteCommentsRepository($connection);
+$sqlitePostsRepository = new SqlitePostsRepository($connection);
+
+// try {
+//     $userPosts = $sqlitePostsRepository->getByUserUuid($user->uuid());
+
+//     foreach($userPosts as $userPost) {
+//         echo $userPost;
+//     }
+// } catch (PostNotFoundException $e) {
+//     echo $e->getMessage();
+// }
+
+// try {
+//     echo $sqliteCommentsRepository->get(new UUID('89385a88-3e13-41bb-916c-a152c410a3d0'));
+// } catch (CommentNotFoundException $e) {
+//     echo $e->getMessage();
+// }
 
 try {
-    echo $sqliteCommentsRepository->get(new UUID('89385a88-3e13-41bb-916c-a152c410a3d0'));
+    $userComments = $sqliteCommentsRepository->getByUserUuid($user->uuid());
+
+    foreach($userComments as $userComment) {
+        echo $userComment;
+    }
 } catch (CommentNotFoundException $e) {
     echo $e->getMessage();
 }
-

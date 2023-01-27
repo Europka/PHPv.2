@@ -5,29 +5,29 @@ namespace GeekBrains\LevelTwo\Blog;
 class Post {
     public function __construct(
         public UUID $uuid,
-        public UUID $uuidAuthor,
+        public UUID $authorUuid,
         public string $title,
         public string $text
     ){}
 
     public function __toString() {
-        return "$this->title" . PHP_EOL . "$this->text";
+        return "$this->title" . PHP_EOL . "$this->text" . PHP_EOL;
     }
     
     public function getUuid() :UUID {
-        return $this->UUID;
+        return $this->uuid;
     }
 
     public function setUuid(UUID $uuid) :void {
         $this->uuid = $uuid;
     }
 
-    public function getIdAuthor() :int {
-        return $this->idAuthor;
+    public function getAuthorUuid() :UUID {
+        return $this->authorUuid;
     }
 
-    public function setIdAuthor(int $idAuthor) :void {
-        $this->idAuthor = $idAuthor;
+    public function setAuthorUuid(UUID $authorUuid) :void {
+        $this->authorUuid = $authorUuid;
     }
 
     public function getTitle() :string {

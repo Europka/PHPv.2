@@ -8,8 +8,7 @@ use GeekBrains\LevelTwo\Blog\Repositories\CommentsRepository\CommentsRepositoryI
 use \PDO;
 use \PDOStatement;
 
-// implements CommentsRepositoryInterface
-class SqliteCommentsRepository {
+class SqliteCommentsRepository implements CommentsRepositoryInterface {
     public function __construct(
         private PDO $connection
     ){}
@@ -50,5 +49,33 @@ class SqliteCommentsRepository {
             new UUID($result['post_uuid']),
             $result['text']
         );
+    }
+
+    public function getByUserUuid(UUID $uuid) :array {
+        $result = [];
+        $statement = $this->connection->prepare(
+            'SELECT * FROM comments WHERE user_uuid = :user_uuid'
+        );
+
+        $statement->execute([
+            'user_uuid' => (string)$uuid
+        ]);
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            throw new CommentNotFoundException("Comment by user uuid not found: $uuid");
+        }
+
+        foreach ($result as $key => $value) {
+            $result[$key] = new Comment(
+                new UUID($value['uuid']),
+                new UUID($value['user_uuid']),
+                new UUID($value['post_uuid']),
+                $value['text']
+            );
+        }
+
+        return $result;
     }
 }

@@ -14,7 +14,6 @@ class SqliteUsersRepository implements UsersRepositoryInterface {
     ){}
 
     public function save(User $user): void {
-
         $statement = $this->connection->prepare(
             'INSERT INTO users 
                 (uuid, username, first_name, last_name) 
